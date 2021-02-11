@@ -1,0 +1,61 @@
+[33mcommit b22cd589cbf514d1e151df40d5418c62bff1c10f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Edi Supriyadi <edisupr@gmail.com>
+Date:   Thu Feb 11 12:06:32 2021 +0700
+
+    initial commit
+
+[1mdiff --git a/.vscode/settings.json b/.vscode/settings.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..06b0842[m
+[1m--- /dev/null[m
+[1m+++ b/.vscode/settings.json[m
+[36m@@ -0,0 +1,3 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m    "C_Cpp.dimInactiveRegions": false[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main.cpp b/src/main.cpp[m
+[1mindex 487e72c..532d978 100644[m
+[1m--- a/src/main.cpp[m
+[1m+++ b/src/main.cpp[m
+[36m@@ -50,7 +50,6 @@[m [mParameters:[m
+ #endif[m
+ [m
+   //*BLE[m
+[31m-  //String serviceData;[m
+   char svcData[350];[m
+   char devices[10][20];[m
+   int dtIndex = 0;[m
+[36m@@ -117,7 +116,6 @@[m [mclass MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {[m
+           char addr[20];[m
+           strcpy(addr, address.c_str());[m
+           if(confirm_device(addr)){[m
+[31m-            //serviceData += "&v" + String(dtIndex) + "=" + Devdata;[m
+             char tmp[] = "";[m
+             String serviceDt = "&v" + String(dtIndex) + "=" + Devdata;[m
+             serviceDt.toCharArray(tmp, serviceDt.length() + 1);[m
+[36m@@ -215,7 +213,6 @@[m [mvoid send_data(String action){[m
+       http.addHeader("Content-Type", "application/x-www-form-urlencoded");[m
+       String httpRequestData = "key=tPmAT5Ab3j7F9&act="+action+"&g="+String(chip_id);   [m
+       if(action=="save"){[m
+[31m-        //httpRequestData += serviceData;[m
+         httpRequestData += String(svcData);[m
+       }   [m
+       int httpResponseCode = http.POST(httpRequestData);    [m
+[36m@@ -249,8 +246,6 @@[m [mvoid send_data(String action){[m
+ char message[51]; // Allocate some space for the string, max 50 plus terminating character[m
+ [m
+ void Task0code( void * pvParameters ){[m
+[31m-  //serviceData.reserve(300);[m
+[31m-[m
+   for(;;){[m
+     if(postNow){[m
+       if(WiFi.status() == WL_CONNECTED){      [m
+[36m@@ -409,7 +404,6 @@[m [mvoid Task1code( void * pvParameters ){[m
+       } else {[m
+         gprev = gcur;[m
+       }    [m
+[31m-      //serviceData = "";[m
+       svcData[0] = '\0';[m
+       dtIndex = 0;[m
+       Serial.println(F("Scanning..."));[m
