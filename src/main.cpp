@@ -50,7 +50,6 @@ Parameters:
 #endif
 
   //*BLE
-  //String serviceData;
   char svcData[350];
   char devices[10][20];
   int dtIndex = 0;
@@ -117,7 +116,6 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
           char addr[20];
           strcpy(addr, address.c_str());
           if(confirm_device(addr)){
-            //serviceData += "&v" + String(dtIndex) + "=" + Devdata;
             char tmp[] = "";
             String serviceDt = "&v" + String(dtIndex) + "=" + Devdata;
             serviceDt.toCharArray(tmp, serviceDt.length() + 1);
@@ -215,7 +213,6 @@ void send_data(String action){
       http.addHeader("Content-Type", "application/x-www-form-urlencoded");
       String httpRequestData = "key=tPmAT5Ab3j7F9&act="+action+"&g="+String(chip_id);   
       if(action=="save"){
-        //httpRequestData += serviceData;
         httpRequestData += String(svcData);
       }   
       int httpResponseCode = http.POST(httpRequestData);    
@@ -249,8 +246,6 @@ void send_data(String action){
 char message[51]; // Allocate some space for the string, max 50 plus terminating character
 
 void Task0code( void * pvParameters ){
-  //serviceData.reserve(300);
-
   for(;;){
     if(postNow){
       if(WiFi.status() == WL_CONNECTED){      
@@ -409,7 +404,6 @@ void Task1code( void * pvParameters ){
       } else {
         gprev = gcur;
       }    
-      //serviceData = "";
       svcData[0] = '\0';
       dtIndex = 0;
       Serial.println(F("Scanning..."));
