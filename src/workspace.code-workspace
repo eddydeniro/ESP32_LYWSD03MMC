@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\ESP32_TH"
+		},
+		{
+			"name": "ESP32_Xiaomi",
+			"path": ".."
+		},
+		{
+			"name": "ESP32 CLIENT",
+			"path": "..\\..\\ESP32 CLIENT"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.ipp": "cpp",
+			"future": "cpp",
+			"system_error": "cpp",
+			"string": "cpp"
+		}
+	}
+}
